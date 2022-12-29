@@ -147,10 +147,11 @@ class _FormScreenState extends State<FormScreen> {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
                             content: Text('Tarefa salva com sucesso!'),
-                            backgroundColor: Colors.blue,
+                            backgroundColor: Colors.green,
                             behavior: SnackBarBehavior.floating,
                           ),
                         );
+                        Navigator.pop(context);
                       }
                     },
                     child: const Text('Adicionar!'),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:primeiro_projeto_alura/components/appbar.dart';
 import 'package:primeiro_projeto_alura/components/task.dart';
+import 'package:primeiro_projeto_alura/screens/form_screen.dart';
 
 class InitialScreen extends StatefulWidget {
   const InitialScreen({super.key});
@@ -59,7 +60,14 @@ class _InitialScreenState extends State<InitialScreen> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const FormScreen(),
+            ),
+          );
+        },
         child: const Icon(
           Icons.add,
         ),
