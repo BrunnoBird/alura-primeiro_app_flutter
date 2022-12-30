@@ -78,16 +78,19 @@ class _TaskState extends State<Task> {
                       children: [
                         SizedBox(
                           width: 200,
-                          child: Text(
-                            widget.name,
-                            style: const TextStyle(
-                              fontSize: 24,
-                              overflow: TextOverflow.ellipsis,
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 8),
+                            child: Text(
+                              widget.name,
+                              style: const TextStyle(
+                                fontSize: 22,
+                                overflow: TextOverflow.ellipsis,
+                              ),
                             ),
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(top: 8.0),
+                          padding: const EdgeInsets.only(top: 8.0, left: 8),
                           child: Difficulty(
                             difficultyLevel: widget.difficulty,
                           ),
