@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:primeiro_projeto_alura/data/total_level_inherited.dart';
 
 import 'difficulty.dart';
 
@@ -7,18 +8,25 @@ class Task extends StatefulWidget {
   final String photo;
   final int difficulty;
 
-  const Task(
+  Task(
       {super.key,
       required this.name,
       required this.photo,
       required this.difficulty});
+
+  int level = 0;
 
   @override
   State<Task> createState() => _TaskState();
 }
 
 class _TaskState extends State<Task> {
-  int level = 0;
+  bool isNetworkImage() {
+    if (widget.photo.contains('http')) {
+      return true;
+    }
+    return false;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,10 +61,15 @@ class _TaskState extends State<Task> {
                       height: 100,
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(4),
-                        child: Image.asset(
-                          widget.photo,
-                          fit: BoxFit.cover,
-                        ),
+                        child: isNetworkImage()
+                            ? Image.network(
+                                widget.photo,
+                                fit: BoxFit.cover,
+                              )
+                            : Image.asset(
+                                widget.photo,
+                                fit: BoxFit.cover,
+                              ),
                       ),
                     ),
                     Column(
@@ -87,7 +100,8 @@ class _TaskState extends State<Task> {
                       child: ElevatedButton(
                         onPressed: () {
                           setState(() {
-                            level++;
+                            widget.level++;
+                            TotalLevelInherited.of(context)!.addTotalLevel();
                           });
                         },
                         child: Column(
@@ -118,7 +132,7 @@ class _TaskState extends State<Task> {
                       child: LinearProgressIndicator(
                         color: Colors.white,
                         value: (widget.difficulty > 0)
-                            ? (level / widget.difficulty) / 10
+                            ? (widget.level / widget.difficulty) / 10
                             : 1,
                       ),
                     ),
@@ -126,7 +140,7 @@ class _TaskState extends State<Task> {
                   Padding(
                     padding: const EdgeInsets.all(12.0),
                     child: Text(
-                      'Nível: $level',
+                      'Nível: ${widget.level}',
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 16,

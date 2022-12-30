@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:primeiro_projeto_alura/components/appbar.dart';
-import 'package:primeiro_projeto_alura/components/task.dart';
+import 'package:primeiro_projeto_alura/components/total_level.dart';
+import 'package:primeiro_projeto_alura/data/task_inherited.dart';
+import 'package:primeiro_projeto_alura/data/total_level_inherited.dart';
 import 'package:primeiro_projeto_alura/screens/form_screen.dart';
 
 class InitialScreen extends StatefulWidget {
@@ -29,33 +31,15 @@ class _InitialScreenState extends State<InitialScreen> {
       body: AnimatedOpacity(
         opacity: opacityTask ? 1 : 0,
         duration: const Duration(milliseconds: 800),
-        child: ListView(
-          children: const [
-            Task(
-              name: 'Aprender Flutter',
-              photo: 'assets/images/dash.png',
-              difficulty: 3,
+        child: Column(
+          children: [
+            const TotalLevel(maxLevel: 100),
+            Expanded(
+              child: ListView(
+                padding: const EdgeInsets.only(bottom: 70),
+                children: TaskInherited.of(context)!.taskList,
+              ),
             ),
-            Task(
-                name: 'Andar de Bike',
-                photo: 'assets/images/bike.webp',
-                difficulty: 2),
-            Task(
-              name: 'Meditar',
-              photo: 'assets/images/meditar.jpeg',
-              difficulty: 5,
-            ),
-            Task(
-              name: 'Ler',
-              photo: 'assets/images/livro.jpg',
-              difficulty: 4,
-            ),
-            Task(
-              name: 'Jogar',
-              photo: 'assets/images/jogar.jpg',
-              difficulty: 1,
-            ),
-            SizedBox(height: 72),
           ],
         ),
       ),
@@ -64,7 +48,9 @@ class _InitialScreenState extends State<InitialScreen> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const FormScreen(),
+              builder: (contextNew) => FormScreen(
+                taskContext: context,
+              ),
             ),
           );
         },
