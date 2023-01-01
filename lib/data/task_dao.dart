@@ -6,7 +6,7 @@ class TaskDao {
   static const String tableSql = 'CREATE TABLE $_tableName('
       '$_name TEXT, '
       '$_difficulty INTEGER, '
-      '$_image TEXT';
+      '$_image TEXT)';
 
   static const String _tableName = 'taskTable';
   static const String _name = 'name';
