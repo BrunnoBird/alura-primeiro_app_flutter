@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 
 class AppBarCustom extends StatefulWidget {
   final VoidCallback onTapIcon;
+  final VoidCallback onRefreshScreen;
 
   const AppBarCustom({
     Key? key,
     required this.onTapIcon,
+    required this.onRefreshScreen,
   }) : super(key: key);
 
   @override
@@ -18,12 +20,13 @@ class _AppBarCustomState extends State<AppBarCustom> {
   Widget build(BuildContext context) {
     return AppBar(
       actions: [
-        Padding(
-          padding: const EdgeInsets.only(right: 20.0),
-          child: InkWell(
-            onTap: widget.onTapIcon,
-            child: const Icon(Icons.remove_red_eye),
-          ),
+        InkWell(
+          onTap: widget.onTapIcon,
+          child: const Icon(Icons.remove_red_eye),
+        ),
+        IconButton(
+          onPressed: widget.onRefreshScreen,
+          icon: const Icon(Icons.refresh_rounded),
         ),
       ],
       title: const Text('Tarefas'),

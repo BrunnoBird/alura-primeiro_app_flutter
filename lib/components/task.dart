@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:primeiro_projeto_alura/data/task_dao.dart';
 import 'package:primeiro_projeto_alura/data/total_level_inherited.dart';
 
 import 'difficulty.dart';
@@ -101,6 +102,31 @@ class _TaskState extends State<Task> {
                       height: 52,
                       width: 52,
                       child: ElevatedButton(
+                        onLongPress: () async {
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) => AlertDialog(
+                              title: const Text('Deseja remover a tarefa?'),
+                              content: const Text(
+                                'Caso a ação for confirmada, não será possível recupera-la',
+                              ),
+                              actions: <Widget>[
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(context, 'Cancel'),
+                                  child: const Text('Cancel'),
+                                ),
+                                TextButton(
+                                  onPressed: () async {
+                                    Navigator.pop(context, 'OK');
+                                    await TaskDao().delete(widget.name);
+                                  },
+                                  child: const Text('OK'),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
                         onPressed: () {
                           setState(() {
                             widget.level++;

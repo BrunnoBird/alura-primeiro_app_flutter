@@ -23,6 +23,7 @@ class _InitialScreenState extends State<InitialScreen> {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60.0),
         child: AppBarCustom(
+          onRefreshScreen: () => setState(() {}),
           onTapIcon: () => {
             setState(() {
               opacityTask = !opacityTask;
@@ -114,7 +115,7 @@ class _InitialScreenState extends State<InitialScreen> {
                 taskContext: context,
               ),
             ),
-          );
+          ).then((value) => setState(() {}));
         },
         child: const Icon(
           Icons.add,
