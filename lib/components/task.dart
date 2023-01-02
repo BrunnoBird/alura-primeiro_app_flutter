@@ -8,14 +8,17 @@ class Task extends StatefulWidget {
   final String name;
   final String photo;
   final int difficulty;
+  int? level;
 
-  Task(
-      {super.key,
-      required this.name,
-      required this.photo,
-      required this.difficulty});
+  Task({
+    super.key,
+    required this.name,
+    required this.photo,
+    required this.difficulty,
+    this.level = 0,
+  });
 
-  int level = 0;
+  int skillLevel = 0;
 
   @override
   State<Task> createState() => _TaskState();
@@ -31,6 +34,9 @@ class _TaskState extends State<Task> {
 
   @override
   Widget build(BuildContext context) {
+    Future<List<Task>> dbTaskLevel = TaskDao().find(widget.name);
+    dbTaskLevel.then((value) => {widget.skillLevel = value.single.level!});
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Stack(
@@ -127,9 +133,15 @@ class _TaskState extends State<Task> {
                             ),
                           );
                         },
-                        onPressed: () {
+                        onPressed: () async {
+                          widget.skillLevel++;
+                          await TaskDao().save(Task(
+                            name: widget.name,
+                            photo: widget.photo,
+                            difficulty: widget.difficulty,
+                            level: widget.skillLevel,
+                          ));
                           setState(() {
-                            widget.level++;
                             TotalLevelInherited.of(context)!.addTotalLevel();
                           });
                         },
@@ -161,15 +173,14 @@ class _TaskState extends State<Task> {
                       child: LinearProgressIndicator(
                         color: Colors.white,
                         value: (widget.difficulty > 0)
-                            ? (widget.level / widget.difficulty) / 10
+                            ? (widget.skillLevel / widget.difficulty) / 10
                             : 1,
                       ),
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(12.0),
-                    child: Text(
-                      'Nível: ${widget.level}',
+                    child: Text(widget.skillLevel == 0 ? 'Nível: ${widget.level}' : 'Nível: ${widget.skillLevel}',
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 16,

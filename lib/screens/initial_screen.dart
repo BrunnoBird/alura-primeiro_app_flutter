@@ -3,8 +3,6 @@ import 'package:primeiro_projeto_alura/components/appbar.dart';
 import 'package:primeiro_projeto_alura/components/task.dart';
 import 'package:primeiro_projeto_alura/components/total_level.dart';
 import 'package:primeiro_projeto_alura/data/task_dao.dart';
-import 'package:primeiro_projeto_alura/data/task_inherited.dart';
-import 'package:primeiro_projeto_alura/data/total_level_inherited.dart';
 import 'package:primeiro_projeto_alura/screens/form_screen.dart';
 
 class InitialScreen extends StatefulWidget {

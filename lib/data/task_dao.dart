@@ -6,12 +6,14 @@ class TaskDao {
   static const String tableSql = 'CREATE TABLE $_tableName('
       '$_name TEXT, '
       '$_difficulty INTEGER, '
-      '$_image TEXT)';
+      '$_image TEXT, '
+      '$_level INTEGER)';
 
   static const String _tableName = 'taskTable';
   static const String _name = 'name';
   static const String _difficulty = 'difficulty';
   static const String _image = 'image';
+  static const String _level = 'level';
 
   save(Task tarefa) async {
     print('Iniciando o save da tarefa: $tarefa');
@@ -40,6 +42,7 @@ class TaskDao {
     mapaDeTarefas[_name] = tarefa.name;
     mapaDeTarefas[_difficulty] = tarefa.difficulty;
     mapaDeTarefas[_image] = tarefa.photo;
+    mapaDeTarefas[_level] = tarefa.level;
     print('Conversão realizada: $mapaDeTarefas');
     return mapaDeTarefas;
   }
@@ -60,6 +63,7 @@ class TaskDao {
         name: linha[_name],
         difficulty: linha[_difficulty],
         photo: linha[_image],
+        level: linha[_level],
       );
       tarefas.add(tarefa);
     }
