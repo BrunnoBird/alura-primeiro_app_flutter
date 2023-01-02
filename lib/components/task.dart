@@ -180,7 +180,10 @@ class _TaskState extends State<Task> {
                   ),
                   Padding(
                     padding: const EdgeInsets.all(12.0),
-                    child: Text(widget.skillLevel == 0 ? 'Nível: ${widget.level}' : 'Nível: ${widget.skillLevel}',
+                    child: Text(
+                      widget.skillLevel == 0
+                          ? 'Nível: ${widget.level}'
+                          : 'Nível: ${widget.skillLevel}',
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 16,
