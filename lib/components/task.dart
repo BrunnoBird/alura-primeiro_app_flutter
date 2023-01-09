@@ -87,13 +87,9 @@ class _TaskState extends State<Task> {
                           width: 200,
                           child: Padding(
                             padding: const EdgeInsets.only(left: 8),
-                            child: Text(
-                              widget.name,
-                              style: const TextStyle(
-                                fontSize: 22,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ),
+                            child: Text(widget.name,
+                                style:
+                                    Theme.of(context).textTheme.displaySmall),
                           ),
                         ),
                         Padding(
@@ -148,13 +144,13 @@ class _TaskState extends State<Task> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.end,
-                          children: const [
-                            Icon(Icons.arrow_drop_up),
+                          children: [
+                            const Icon(Icons.arrow_drop_up),
                             Text(
                               'UP',
-                              style: TextStyle(
-                                fontSize: 12,
-                              ),
+                              style: Theme.of(context)
+                                  .primaryTextTheme
+                                  .labelMedium,
                             )
                           ],
                         ),
@@ -184,10 +180,7 @@ class _TaskState extends State<Task> {
                       widget.skillLevel == 0
                           ? 'Nível: ${widget.level}'
                           : 'Nível: ${widget.skillLevel}',
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                      ),
+                      style: Theme.of(context).primaryTextTheme.labelLarge,
                     ),
                   ),
                 ],
